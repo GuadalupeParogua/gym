@@ -19,6 +19,15 @@ use Illuminate\Support\Facades\Route;
 });*/
 Route::get('/', function () {
     return 'este es el index';
+})->name('index');
+
+
+Route::get('/login',[AdministradorController::class,'loginView'])->name('login.view')->middleware('guest:admin');
+Route::post('/login',[AdministradorController::class,'login'])->name('login')->middleware('guest:admin'); 
+
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/menu', function () {
+    return "inicio sesion";
+})->name("menu");
 });
-Route::get('/login',[AdministradorController::class,'loginView'])->name('login.view');
-Route::post('/login',[AdministradorController::class],'loginView')->name('login'); 
+

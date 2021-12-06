@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\administrador;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AdministradorSeeder extends Seeder
 {
@@ -13,6 +15,9 @@ class AdministradorSeeder extends Seeder
      */
     public function run()
     {
-        //
+        administrador::create([
+            'usuario'=>'parogua',
+            'password'=>Hash::make('maria123')
+        ]);
     }
 }
