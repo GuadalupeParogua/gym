@@ -63,20 +63,10 @@
                                             <input type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" name="password" placeholder="Introducir contraseña" required>
                                         </div>
-                                      
                                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Iniciar sesion">
-                
-                                        </a>
-                                        <hr>
-                                       
+                                        <hr>  
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

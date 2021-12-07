@@ -18,16 +18,16 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 Route::get('/', function () {
-    return 'este es el index';
-})->name('index');
+    return view('menu');
+})->name('menu');
 
 
 Route::get('/login',[AdministradorController::class,'loginView'])->name('login.view')->middleware('guest:admin');
 Route::post('/login',[AdministradorController::class,'login'])->name('login')->middleware('guest:admin'); 
 
 Route::middleware('auth:admin')->group(function () {
-    Route::get('/menu', function () {
-    return "inicio sesion";
-})->name("menu");
+    Route::get('/menu',[AdministradorController::class,'menu'])->name("menu");
+
+
 });
 

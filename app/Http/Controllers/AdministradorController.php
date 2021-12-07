@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AdministradorController extends Controller
 {
+ 
   public function loginView(){
       return view('login');
   }
+
   public function login(Request $request){
     $validateData = $request->validate([
       'usuario' => ['required','max:50'],
@@ -31,4 +33,9 @@ class AdministradorController extends Controller
     //return redirect()->route("menu");
     return back()->withErrors(['error'=>'la contraseña incompleta']);
   }
+
+  public function menu(){ 
+    return view('menu');
+  }
+
 }

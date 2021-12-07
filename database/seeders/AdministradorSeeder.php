@@ -16,8 +16,11 @@ class AdministradorSeeder extends Seeder
     public function run()
     {
         administrador::create([
-            'usuario'=>'parogua',
-            'password'=>Hash::make('maria123')
+            'id'=>1,
+            'persona_id'=>1,
+            'usuario'=>'juan',
+            'password'=>Hash::make('1234')
+            
         ]);
     }
 }
