@@ -14,7 +14,7 @@ class CreateInstructorsTable extends Migration
     public function up()
     {
         Schema::create('instructors', function (Blueprint $table) {
-            $table->id();//llave foranea de persona
+            $table->id();
             $table->unsignedBigInteger('persona_id');
             $table->string ('especialidad');
             $table->timestamps();

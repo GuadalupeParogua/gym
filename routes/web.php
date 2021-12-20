@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 Route::get('/', function () {
-    return view('menu');
-})->name('menu');
+    return view('login');
+})->name('login');
 
 
 Route::get('/login',[AdministradorController::class,'loginView'])->name('login.view')->middleware('guest:admin');
@@ -27,7 +27,6 @@ Route::post('/login',[AdministradorController::class,'login'])->name('login')->m
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/menu',[AdministradorController::class,'menu'])->name("menu");
-
 
 });
 
