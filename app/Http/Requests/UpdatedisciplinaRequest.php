@@ -13,7 +13,7 @@ class UpdatedisciplinaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdatedisciplinaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => 'required|max:20',
+            'descripcion' => 'nullable|max:50',
+            'precio' => 'required',
+            'estado',
         ];
     }
 }

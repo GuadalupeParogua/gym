@@ -8,79 +8,44 @@ use App\Http\Requests\UpdatepaqueteRequest;
 
 class PaqueteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+       $paquetes = Paquete::all();
+       return view('gestionar_paquete.index', compact('paquetes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('gestionar_paquete.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorepaqueteRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StorepaqueteRequest $request)
     {
-        //
+        $paquete = new Paquete($request->all());
+        $paquete->estado = 1;
+        $paquete->save();
+        return redirect()->route('paquetes.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\paquete  $paquete
-     * @return \Illuminate\Http\Response
-     */
-    public function show(paquete $paquete)
+    public function edit($id) 
     {
-        //
+        $paquete = Paquete::findOrFail($id);
+        return view('gestionar_paquete.edit', compact('paquete')); 
+    }                                        
+
+    public function update(UpdatepaqueteRequest $request, $id)
+    {
+        $paquete = Paquete::findOrFail($id);
+        $paquete->update($request->all());
+        return redirect()->route('paquetes.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\paquete  $paquete
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(paquete $paquete)
+    public function destroy($id) 
     {
-        //
+        $paquete = Paquete::findOrFail($id); 
+        $paquete->delete();
+        return redirect()->route('paquetes.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatepaqueteRequest  $request
-     * @param  \App\Models\paquete  $paquete
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatepaqueteRequest $request, paquete $paquete)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\paquete  $paquete
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(paquete $paquete)
-    {
-        //
-    }
 }

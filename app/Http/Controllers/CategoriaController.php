@@ -8,79 +8,42 @@ use App\Http\Requests\UpdatecategoriaRequest;
 
 class CategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+        return view('gestionar_categoria.index', compact('categorias'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('gestionar_categoria.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorecategoriaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StorecategoriaRequest $request)
     {
-        //
+        $categoria = new Categoria($request->all());
+        $categoria->save();
+        return redirect()->route('categorias.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function show(categoria $categoria)
+    public function edit($id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+        return view('gestionar_categoria.edit', compact('categoria'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(categoria $categoria)
+    public function update(UpdatecategoriaRequest $request, $id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+        $categoria->update($request->all());
+        return redirect()->route('categorias.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatecategoriaRequest  $request
-     * @param  \App\Models\categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatecategoriaRequest $request, categoria $categoria)
+    public function destroy($id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+        $categoria->delete();
+        return redirect()->route('categorias.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(categoria $categoria)
-    {
-        //
-    }
 }

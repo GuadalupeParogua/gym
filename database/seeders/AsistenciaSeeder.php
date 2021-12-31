@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\asistencia;
 use Illuminate\Database\Seeder;
 
 class AsistenciaSeeder extends Seeder
@@ -13,6 +14,11 @@ class AsistenciaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        /*asistencia::create([
+            'id'=>1,
+            'persona_id'=>1,
+            'dia'=>'lunes',
+            'fecha' => '2021-03-04',
+        ]);*/
     }
 }

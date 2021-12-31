@@ -32,9 +32,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
+                <!--<div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
-                </div>
+                    
+                </div>-->
                 <div class="sidebar-brand-text mx-3">Urban Fitness</div>
             </a>
 
@@ -66,12 +67,10 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestionar:</h6>
-                        <a class="collapse-item" href="buttons.html">Cliente</a>
-                        <a class="collapse-item" href="cards.html">Instructor</a>
-                        <a class="collapse-item" href="buttons.html">Administrador</a>
-                        <a class="collapse-item" href="cards.html">Peso</a>
-                        <a class="collapse-item" href="cards.html">Asistencia</a>
-                        
+                        <a class="collapse-item" href="{{asset('/personas/administradores')}}">Administradores</a>
+                        <a class="collapse-item" href="{{asset('/personas/clientes')}}">Clientes</a>
+                        <a class="collapse-item" href="{{asset('/personas/instructores')}}">Instructores</a>
+                        <a class="collapse-item" href="{{asset('/asistencias')}}">Asistencias</a>
                     </div>
                 </div>
             </li>
@@ -81,56 +80,75 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Administrar servicios</span>
+                    <span>Administrar Servicios</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestionar:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Paquete</a>
-                        <a class="collapse-item" href="utilities-border.html">Area</a>
-                        <a class="collapse-item" href="create.disciplina.blase.php">Disciplina</a>
-                        <a class="collapse-item" href="utilities-other.html">Grupo</a>
+                        <a class="collapse-item" href="{{asset('/areas')}}">Areas</a>
+                        <a class="collapse-item" href="{{asset('/disciplinas')}}">Disciplinas</a>
+                        <a class="collapse-item" href="{{asset('/grupos')}}">Grupos</a>
+                        <a class="collapse-item" href="{{asset('/paquetes')}}">Paquetes</a>
                     </div>
                 </div>
             </li>
+            
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Administrar venta</span>
+                    <span>Administrar Producto</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestionar:</h6>
-                        <a class="collapse-item" href="login.html">Inscripcion</a>
-                        <a class="collapse-item" href="register.html">Pago de clientes</a>
+                        <a class="collapse-item" href="{{asset('/categorias')}}">Categorias</a>
+                        <a class="collapse-item" href="{{asset('/productos')}}">Productos</a>
+                        <a class="collapse-item" href="#">Grupos</a>
                     </div>
                 </div>
             </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
+
             <!-- Heading -->
             <div class="sidebar-heading">
-                Seguridad
+                Mantenimiento
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapseLogin">
+                    aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Administrar Seguridad</span>
+                    <span>Gestionar Maquinaria</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!--h6 class="collapse-header">Gestionar:</h6-->
-                        <a class="collapse-item" href="login.html">Detallar Bitacora</a>
-                        <a class="collapse-item" href="register.html">Cerrar sesion</a>
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                     </div>
                 </div>
             </li>
 
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Tables</span></a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -358,12 +376,13 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Menu principal</h1>
+                        <h1 class="h3 mb-0 text-gray-800">@yield('header')</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generar reporte</a>
                     </div>
                     <!-- content Row-->
                     <div class="row">
+                        
                         @yield('content')
 
                     </div>
@@ -403,10 +422,10 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Seleccione "Cerrar sesión" si está listo para terminar su sesión actual.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="{{route('login')}}">Cerrar sesión</a>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ class UpdatepersonaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class UpdatepersonaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'ci' => 'required|max:10',
+            'nombre' => 'required|min:3',
+            'apellido' => 'required|min:3',
+            'url_huella' => 'nullable',
+            'tel' => 'nullable|max:15',
+            'email' => 'required|email|min:10:max:50',
+            'fecha_naci' => 'required',
+            'genero' ,
+            //'tipo' => ['required', 'max:1'],
+            //'especialidad' => ['required'],
         ];
     }
 }

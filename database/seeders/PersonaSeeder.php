@@ -22,11 +22,26 @@ class PersonaSeeder extends Seeder
         'url_huella'=> "asdfghjkl",
         'tel'=>7777777,
         'email'=> 'juaperez@gmail.com',
-        'foto'=>'estoEsUnaFoto.png',
+        'foto'=>'storage/personas/usuariohombre.jpg',
        'fecha_naci'=>'2000-03-04',
         'genero'=>'M',
         'estado'=>1,
         'tipo'=>'A'
        ]);
+
+       /*persona::create([
+        'id'=>2,
+        'ci'=>222222,
+        'nombre'=> 'Pedro',
+        'apellido'=> 'Perez',
+        'url_huella'=> "asdfghjka",
+        'tel'=>7888888,
+        'email'=> 'pedroperez@gmail.com',
+        'foto'=>'estoEsUnaFoto2.png',
+       'fecha_naci'=>'2000-07-06',
+        'genero'=>'M',
+        'estado'=>1,
+        'tipo'=>'C'
+       ]);*/
     }
 }

@@ -3,84 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\asistencia;
+use App\Models\persona;
 use App\Http\Requests\StoreasistenciaRequest;
 use App\Http\Requests\UpdateasistenciaRequest;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
 class AsistenciaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        $asistencias = Asistencia::all();
+        $asistencias->load('persona');
+        return view('gestionar_asistencia.index', compact('asistencias'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreasistenciaRequest $request) 
     {
-        //
+        $persona = Persona::where('ci', $request->ci)->first();
+        if  (is_null($persona)) {
+            return back()->withErrors(['Ci no existe']);
+        }
+        $asistencia = new Asistencia();
+        $asistencia->persona_id = $persona->id;
+        $now = Carbon::now();
+        //$f = $now->format('Y-m-d H:i:s A'); // si es am o pm
+        $asistencia->fecha = $now->format('Y-m-d H:i:s');// Year/month/day Hora:minuto:segundo
+        $asistencia->dia = $now->format('D');
+        
+        $asistencia->save();
+        return redirect()->route('asistencias.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreasistenciaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreasistenciaRequest $request)
+    public function edit($id) 
     {
-        //
+        $asistencia = Asistencia::findOrFail($id);
+        $asistencia->load('persona');
+        //$persona = Persona::findOrFail($persona_id);
+        return view('gestionar_asistencia.edit', ['asistencia' => $asistencia]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\asistencia  $asistencia
-     * @return \Illuminate\Http\Response
-     */
-    public function show(asistencia $asistencia)
+    public function update(UpdateasistenciaRequest $request , $id) 
     {
-        //
+        $persona = Persona::where('ci', $request->ci)->first();
+        if  (is_null($persona)) {
+            return back()->withErrors(['Ci no existe']);
+        }
+        $asistencia = Asistencia::findOrFail($id);
+        $asistencia->persona_id = $persona->id;
+        $asistencia->save();
+
+        return redirect()->route('asistencias.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\asistencia  $asistencia
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(asistencia $asistencia)
+    public function destroy($id) 
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateasistenciaRequest  $request
-     * @param  \App\Models\asistencia  $asistencia
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateasistenciaRequest $request, asistencia $asistencia)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\asistencia  $asistencia
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(asistencia $asistencia)
-    {
-        //
+        $asistencia = Asistencia::findOrFail($id);
+        $asistencia->delete();
+        return redirect()->route('asistencias.index');
     }
 }

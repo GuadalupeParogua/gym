@@ -13,7 +13,7 @@ class Storecontrol_de_pesoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class Storecontrol_de_pesoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'altura' => 'required',
+            'peso' => 'required',
+            'imc' => 'required',
+            'fecha', 
         ];
     }
 }

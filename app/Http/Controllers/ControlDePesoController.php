@@ -3,84 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\control_de_peso;
+use App\Models\cliente;
+use App\Models\persona;
 use App\Http\Requests\Storecontrol_de_pesoRequest;
 use App\Http\Requests\Updatecontrol_de_pesoRequest;
 
+use Illuminate\Support\Carbon;
+
 class ControlDePesoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function create($cliente_id) 
     {
-        //
+        $cliente = Cliente::findOrFail($cliente_id);
+        $persona = Persona::where('id', $cliente->persona_id)->first();
+        return view('gestionar_peso.create', compact('cliente', 'persona'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Storecontrol_de_pesoRequest $request, $cliente_id) 
     {
-        //
+        $cliente = Cliente::where('id', $cliente_id)->first();
+        if (is_null($cliente)) {
+            return back()->withErrors(['Id del cliente no existe']);
+        } 
+        $p = new control_de_peso();
+        $p->altura = $request->altura;
+        $p->peso = $request->peso;
+        $p->imc = $request->imc;
+        $now = Carbon::now();
+        $p->fecha = $now->format('Y-m-d');
+        $p->cliente_id = $cliente->id;
+        $p->save();
+        $persona  = Persona::where('id', $cliente->persona_id)->first();
+
+        return redirect()->route('personas.clientes.show', $persona->id);
+    }
+   
+    public function edit($id, $persona_id) 
+    {
+        $peso = control_de_peso::findOrFail($id);
+        $persona = Persona::where('id', $persona_id)->first();
+        return view('gestionar_peso.edit', compact('peso', 'persona'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Storecontrol_de_pesoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Storecontrol_de_pesoRequest $request)
+    public function update(Updatecontrol_de_pesoRequest $request, $id, $persona_id) 
     {
-        //
+        $p = control_de_peso::findOrFail($id);
+        $p->altura = $request->altura;
+        $p->peso = $request->peso;
+        $p->imc = $request->imc;
+        $p->save();
+        return redirect()->route('personas.clientes.show', $persona_id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\control_de_peso  $control_de_peso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(control_de_peso $control_de_peso)
+    public function destroy($id, $persona_id)
     {
-        //
+        $peso = control_de_peso::findOrFail($id);
+        $peso->delete();
+        
+        return redirect()->route('personas.clientes.show', $persona_id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\control_de_peso  $control_de_peso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(control_de_peso $control_de_peso)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Updatecontrol_de_pesoRequest  $request
-     * @param  \App\Models\control_de_peso  $control_de_peso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Updatecontrol_de_pesoRequest $request, control_de_peso $control_de_peso)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\control_de_peso  $control_de_peso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(control_de_peso $control_de_peso)
-    {
-        //
-    }
 }

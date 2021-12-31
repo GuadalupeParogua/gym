@@ -23,8 +23,9 @@ class CreateControlDePesosTable extends Migration
             $table->date('fecha');
             
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('cliente_id')->on('clientes')->references('id');
+            $table->foreign('cliente_id')->on('clientes')->references('id')->onDelete('cascade');
         });
     }
 

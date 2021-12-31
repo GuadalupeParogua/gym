@@ -3,84 +3,60 @@
 namespace App\Http\Controllers;
 
 use App\Models\disciplina;
+use App\Models\area;
+use App\Models\paquete;
 use App\Http\Requests\StoredisciplinaRequest;
 use App\Http\Requests\UpdatedisciplinaRequest;
 
 class DisciplinaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $disciplinas = Disciplina::all();
+       return view('gestionar_disciplina.index', compact('disciplinas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $areas = Area::all();
+        $paquetes = Paquete::all();
+        return view('gestionar_disciplina.create', compact('areas', 'paquetes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoredisciplinaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoredisciplinaRequest $request)
     {
-        //
+        $disciplina = new Disciplina($request->all()); 
+        $disciplina->area_id = $request->area_id;
+        $disciplina->paquete_id = $request->paquete_id;
+        $disciplina->estado = 1;
+        $disciplina->save();
+
+        return redirect()->route('disciplinas.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\disciplina  $disciplina
-     * @return \Illuminate\Http\Response
-     */
-    public function show(disciplina $disciplina)
+    public function edit($id)
     {
-        //
+        $disciplina = disciplina::findOrFail($id);
+        $areas = Area::all();
+        $paquetes = Paquete::all();
+        return view('gestionar_disciplina.edit', compact('disciplina', 'areas', 'paquetes'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\disciplina  $disciplina
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(disciplina $disciplina)
+    public function update(UpdatedisciplinaRequest $request, $id)
     {
-        //
+        $disciplina = Disciplina::findOrFail($id);
+        $disciplina->update($request->all());
+        $disciplina->area_id = $request->area_id;
+        $disciplina->paquete_id = $request->paquete_id;
+        $disciplina->save();
+        return redirect()->route('disciplinas.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatedisciplinaRequest  $request
-     * @param  \App\Models\disciplina  $disciplina
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatedisciplinaRequest $request, disciplina $disciplina)
+    public function destroy($id)
     {
-        //
+        $disciplina = Disciplina::findOrFail($id);
+        $disciplina->delete();
+        return redirect()->route('disciplinas.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\disciplina  $disciplina
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(disciplina $disciplina)
-    {
-        //
-    }
 }

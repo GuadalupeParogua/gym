@@ -14,13 +14,13 @@ class CreateInstructorsTable extends Migration
     public function up()
     {
         Schema::create('instructors', function (Blueprint $table) {
-            $table->id();
+            $table->id();//llave foranea de persona
             $table->unsignedBigInteger('persona_id');
             $table->string ('especialidad');
             $table->timestamps();
             $table->softDeletes();
             
-            $table->foreign('persona_id')->on('personas')->references('id');
+            $table->foreign('persona_id')->on('personas')->references('id')->onDelete('cascade');
         });
     }
 

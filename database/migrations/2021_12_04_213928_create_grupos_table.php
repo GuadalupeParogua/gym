@@ -27,8 +27,10 @@ class CreateGruposTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             //$table->primary('disciplina_id');
-            $table->foreign('instructor_id')->on('instructors')->references('id');
-            $table->foreign('disciplina_id')->on('disciplinas')->references('id');
+            $table->foreign('instructor_id')->on('instructors')->references('id')
+            ->onDelete('cascade');
+            $table->foreign('disciplina_id')->on('disciplinas')->references('id')
+            ->onDelete('cascade');
         });
     }
 

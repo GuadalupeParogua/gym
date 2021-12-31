@@ -15,13 +15,13 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();//id persona primary
-            $table->integer('ci')->unique();
+            $table->String('ci')->unique();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('url_huella')->unique();
+            $table->string('url_huella')->unique()->nullable();
             $table->integer('tel')->nullable();
             $table->string('email')->unique();
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->date('fecha_naci');
             $table->char('genero');
             $table->binary('estado');

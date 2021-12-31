@@ -13,7 +13,7 @@ class StoredisciplinaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class StoredisciplinaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => 'required|max:20',
+            'descripcion' => 'nullable|min:5',
+            'precio' => 'required',
+            'estado',
+
         ];
     }
 }

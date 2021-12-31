@@ -13,7 +13,7 @@ class UpdatepaqueteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdatepaqueteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => 'required|max:20',
+            'descripcion' => 'nullable|max:50',
+            'precio' => 'required',
+            'duracion' => 'required', //tipo fecha (hasta que fecha durara el paquete)
+            'estado',
         ];
     }
 }

@@ -13,7 +13,7 @@ class UpdategrupoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class UpdategrupoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => 'required|max:10',
+            'dia_sem' => 'required',
+            'hra_ini' => 'required',
+            'hra_fin' => 'required',
+            'cupo' => 'required',
+            'estado',
         ];
     }
 }

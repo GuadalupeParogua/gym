@@ -22,7 +22,7 @@ class CreateAdministradorsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             
-            $table->foreign('persona_id')->on('personas')->references('id');
+            $table->foreign('persona_id')->on('personas')->references('id')->onDelete('cascade');
            
             
         });

@@ -13,7 +13,7 @@ class StoreclienteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class StoreclienteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'ci' => 'required|max:10|unique:personas',
+            'nombre' => 'required|min:3',
+            'apellido' => 'required|min:3',
+            'url_huella' => 'nullable|unique:personas',
+            'tel' => 'nullable|max:15',
+            'foto' => 'nullable',
+            'email' => 'required|email|min:10:max:50|unique:personas',
+            'fecha_naci' => 'required',
+            'genero' => 'required|max:1',
+            //'tipo' => ['required', 'max:1'],
+            
+            'edad' => ['required'],
         ];
     }
 }

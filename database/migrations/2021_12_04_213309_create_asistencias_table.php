@@ -17,13 +17,12 @@ class CreateAsistenciasTable extends Migration
             $table->id(); //id asistencia
             $table->unsignedBigInteger('persona_id');//llave foranea
             
-            $table->string('cod_asistencia');
             $table->dateTime('fecha');
             $table->string('dia');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('persona_id')->on('personas')->references('id');
+            $table->foreign('persona_id')->on('personas')->references('id')->onDelete('cascade');
         });
     }
 

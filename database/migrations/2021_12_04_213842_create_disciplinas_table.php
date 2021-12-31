@@ -23,8 +23,8 @@ class CreateDisciplinasTable extends Migration
             $table->binary('estado');
             $table->timestamps();
             $table->softDeletes(); 
-            $table->foreign('area_id')->on('areas')->references('id');
-            $table->foreign('paquete_id')->on('paquetes')->references('id');
+            $table->foreign('area_id')->on('areas')->references('id')->onDelete('cascade');
+            $table->foreign('paquete_id')->on('paquetes')->references('id')->onDelete('cascade');
         });
     }
 

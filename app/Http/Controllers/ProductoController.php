@@ -3,84 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\producto;
+use App\Models\categoria;
 use App\Http\Requests\StoreproductoRequest;
 use App\Http\Requests\UpdateproductoRequest;
 
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $productos = Producto::all();
+        return view('gestionar_producto.index', compact('productos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+        return view('gestionar_producto.create', compact('categorias'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreproductoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreproductoRequest $request)
     {
-        //
+        $producto = new Producto($request->all());
+        $producto->estado = 1;
+        $producto->save();
+        return redirect()->route('productos.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function show(producto $producto)
+    public function edit($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        $categorias = Categoria::all();
+        return view('gestionar_producto.edit', compact('categorias', 'producto')); 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(producto $producto)
+    public function update(UpdateproductoRequest $request, $id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        $producto->update($request->all());
+        //$producto->categoria_id = $request->categoria_id;
+        //$producto->save();
+        return redirect()->route('productos.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateproductoRequest  $request
-     * @param  \App\Models\producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateproductoRequest $request, producto $producto)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(producto $producto)
-    {
-        //
+        $producto = Producto::findOrFail($id);
+        $producto->delete(); 
     }
 }
