@@ -46,6 +46,9 @@
     box-sizing: border-box
 }
 
+.col-sm-12.col-md-6 {
+    display: none;
+}
 html {
     font-family                : sans-serif;
     line-height                : 1.15;
